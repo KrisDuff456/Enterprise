@@ -21,23 +21,24 @@ public class JDBC {
 		 conn= DriverManager.getConnection(DB_URL,USER,PASS);
 		 System.out.println("Connecting to database..");
 	}catch(SQLException sqle) {sqle.printStackTrace();
-	} conn.close();
+	} //conn.close();
   }
 	
 	public void addAccount()throws Exception{
 	try {
 	   Statement stmt = null;
 		 stmt = conn.createStatement();
-		String sqlInsert = "INSERT INTO account VALUES (1, 3,'email@gmail.com','password',0,0,'John','Doe',1,'2005-01-01')";
+		String sqlInsert = "INSERT INTO account VALUES (1, 3,'email@gmail.com','password',0,0,'John','Doe',01,'2005-01-01')";
 		stmt.executeUpdate(sqlInsert);
 	}catch(SQLException sqle) {sqle.printStackTrace();}
-	conn.close();
+	//conn.close();
   } 
 	
 	public void selectAccount() throws Exception{
 	try {
 		 Statement stmt = null; 
-		 String sqlSelect= "SELECT AccountID, CustomerID, Email, Password, PurchasedFilms, First_name, Last_name FROM account";
+		 stmt = conn.createStatement();
+		 String sqlSelect= "SELECT * FROM account";
 		 ResultSet rs = stmt.executeQuery(sqlSelect);
 	while (rs.next()) {
 		 int accID = rs.getInt("AccountID");
@@ -47,11 +48,20 @@ public class JDBC {
 		 int purchFilm = rs.getInt("PurchasedFilms");
 		 String fName = rs.getString("First_name");
 		 String lName = rs.getString("Last_name");
-		 System.out.println("AccountID " + accID + ", CustomerID " + custId + ", Email" + email + ", Password" + password + ", PurchasedFilms " + purchFilm + ", First_name " + fName + ", Last_name " + lName);
-		  }
+		 String dateOfBirth = rs.getString("Date_of_Birth");
+		 System.out.println("AccountID: " + accID + ", CustomerID: " + custId + ", Email: " + email + ", Password: " + password + ", PurchasedFilms " + purchFilm + ", First_name: " + fName + ", Last_name: " + lName + "Date_of_Birth:" + dateOfBirth );
+	 }
 		  rs.close();
-			conn.close();
-	    }catch(SQLException sqle) {sqle.printStackTrace();
-     }
+	  }catch(SQLException sqle) {sqle.printStackTrace();}
+	 conn.close();
   }
+	public void deleteAccount() throws Exception{
+		try {
+			Statement stmt = null;
+			stmt = conn.createStatement();
+			String sqlDel = "DELETE from account";
+			stmt.executeUpdate(sqlDel);
+			System.out.println("User Account has been deleted..");
+		}catch(SQLException sqle) {sqle.printStackTrace();}
+	}
 }
