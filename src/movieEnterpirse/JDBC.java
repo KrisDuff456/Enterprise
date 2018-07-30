@@ -1,4 +1,4 @@
-package movieEnterpirse;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBC {
-	  
+	
 	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/filmenterprise";
 	static final String USER = "root";
-	static final String PASS = "password123";
+	static final String PASS = "password";
 	
 	static Connection conn = null;
 
@@ -49,12 +49,13 @@ public class JDBC {
 		 String fName = rs.getString("First_name");
 		 String lName = rs.getString("Last_name");
 		 String dateOfBirth = rs.getString("Date_of_Birth");
-		 System.out.println("AccountID: " + accID + ", CustomerID: " + custId + ", Email: " + email + ", Password: " + password + ", PurchasedFilms " + purchFilm + ", First_name: " + fName + ", Last_name: " + lName + "Date_of_Birth:" + dateOfBirth );
+		 System.out.println("AccountID: " + accID + ", CustomerID: " + custId + ", Email: " + email + ", Password: " + password + ", PurchasedFilms " + purchFilm + ", First_name: " + fName + ", Last_name: " + lName + ", Date_of_Birth:" + dateOfBirth );
 	 }
 		  rs.close();
 	  }catch(SQLException sqle) {sqle.printStackTrace();}
 	 conn.close();
   }
+	
 	public void deleteAccount() throws Exception{
 		try {
 			Statement stmt = null;
@@ -63,5 +64,6 @@ public class JDBC {
 			stmt.executeUpdate(sqlDel);
 			System.out.println("User Account has been deleted..");
 		}catch(SQLException sqle) {sqle.printStackTrace();}
+	conn.close();
 	}
 }

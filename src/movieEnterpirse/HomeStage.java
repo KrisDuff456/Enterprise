@@ -1,4 +1,4 @@
-package movieEnterpirse;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,6 +29,28 @@ public class HomeStage extends Application{
 		Scene scene = new Scene(root, 400,400);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Home");
+		
+		filmStage.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle (ActionEvent event) {
+				primaryStage.close();
+				try {
+					new filmStage().start(new Stage());
+				}catch(Exception e) {e.printStackTrace();}
+				}
+			});
+			primaryStage.show();
+		
+		
+		loginStage.setOnAction(new EventHandler<ActionEvent>() {
+			  @Override
+			  public void handle(ActionEvent event) {
+				  primaryStage.close();
+				   try {
+					new LoginStage().start(new Stage());
+				} catch (Exception e) {e.printStackTrace();}
+			  }
+		  });
+		 primaryStage.show();
 		 
 		 accountStage.setOnAction(new EventHandler<ActionEvent>() {
 			  @Override
