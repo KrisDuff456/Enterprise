@@ -1,5 +1,4 @@
-
-
+package enterprise;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,7 +12,7 @@ public class JDBC {
 	static final String USER = "root";
 	static final String PASS = "password";
 	
-	static Connection conn = null;
+	public static Connection conn = null;
 
 	public void accessDB() throws Exception {
 	try {
@@ -26,10 +25,11 @@ public class JDBC {
 	
 	public void addAccount()throws Exception{
 	try {
-	   Statement stmt = null;
+	     Statement stmt = null;
 		 stmt = conn.createStatement();
-		String sqlInsert = "INSERT INTO account VALUES (1, 3,'email@gmail.com','password',0,0,'John','Doe',01,'2005-01-01')";
-		stmt.executeUpdate(sqlInsert);
+		 String sqlInsert = "INSERT INTO account VALUES (1, 3,'email@gmail.com','password',0,0,'John','Doe',01,'2005-01-01')";
+		 stmt.executeUpdate(sqlInsert);
+		 System.out.println("User Account created...");
 	}catch(SQLException sqle) {sqle.printStackTrace();}
 	//conn.close();
   } 

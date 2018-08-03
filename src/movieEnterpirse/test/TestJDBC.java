@@ -1,15 +1,43 @@
+package test;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.junit.Test;
 
-public class TestJDBC {
+import enterprise.JDBC;
 
+public class TestJDBC {
+	Connection connection;
+	Statement stmt;
+	
 	@Test
-	public void testConncetion(){
+	public void testConn() throws SQLException{
 	    new JDBC();
-		assertNotNull("conncetion not found",JDBC.conn);
+	    assertNull("did not find connection",JDBC.conn);
 	}
 	
+	@Test
+	public void testAccess() throws Exception {
+		JDBC test = new JDBC();
+		test.accessDB();
+		String DB_URL = "jdbc:mysql://127.0.0.1:3306/filmenterprise";
+		String USER = "root";
+		String PASS = "password";	
+		connection = DriverManager.getConnection(DB_URL,USER,PASS);
+		connection.close(); 
+	}
+    @Test
+    public void test() throws Exception {
+    	JDBC test = new JDBC();
+    	String name ="John";
+    	String email = "Customer@mail.com";
+    	SqlCommandresponse = test.selectAccount();
+    	test.addAccount((name,email));
+    }
+    	
+
 }
